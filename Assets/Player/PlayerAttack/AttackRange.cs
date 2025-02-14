@@ -25,15 +25,17 @@ public class AttackRange : MonoBehaviour // 평타 범위 관련 코드
         // 좌클릭(평타)시에만 콜라이더 활성화
         if (Input.GetMouseButtonDown(0))
         {
-            StartCoroutine(EnableColliderForSeconds(0.2f));
+           StartCoroutine(EnableColliderForSeconds(0.2f));
         }
     }
 
     IEnumerator EnableColliderForSeconds(float duration)
     {
         attackCollider.enabled = true;  // 콜라이더 활성화
+        Debug.Log("콜라이더 켜짐");
         yield return new WaitForSeconds(duration); // 일정 시간 대기
         attackCollider.enabled = false; // 다시 비활성화
+        Debug.Log("콜라이더 꺼짐");
     }
 
 }

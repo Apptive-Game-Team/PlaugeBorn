@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightningRange : MonoBehaviour
+public class LightningRange : DamageRange
 {
-    public GameObject dashColliderObj;
-    void Start()
-    {
-        dashColliderObj.SetActive(false);
-    }
-
+    // 벽력일섬 데미지 추가
 }
