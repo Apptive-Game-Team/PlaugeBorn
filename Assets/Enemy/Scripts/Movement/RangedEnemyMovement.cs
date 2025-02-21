@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class RangedEnemyMovement : MonoBehaviour, IEnemyMovement
@@ -7,9 +8,11 @@ public class RangedEnemyMovement : MonoBehaviour, IEnemyMovement
     public float moveSpeed = 3f;
     private Transform player;
 
-    // knockback 관련 변수들
+    [Header("넉백 관련 변수")]
     public float knockbackForce = 5f;
-    public float knockbackDuration = 0.5f;
+    public float knockbackDuration = 0.1f;
+
+    [Header("인식 범위 변수")] public const float RecognizeRange = 10.0f;
 
     public float MoveSpeed
     {
@@ -27,6 +30,11 @@ public class RangedEnemyMovement : MonoBehaviour, IEnemyMovement
     }
     public void Move()
     {
+        Vector3 direction = player.position - transform.position;
+        if (direction.magnitude > RecognizeRange)
+        {
+            return;
+        }
         Vector3 scale = transform.localScale; 
         if (player.position.x > transform.position.x)
         {
@@ -37,20 +45,27 @@ public class RangedEnemyMovement : MonoBehaviour, IEnemyMovement
             scale.x = 1.0f;
         }
         transform.localScale = scale;
-        Vector3 direction = player.position - transform.position;
+
         direction.Normalize();
 
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        transform.position += direction * (moveSpeed * Time.deltaTime);
     }
-    // TODO: 잘 안됨
-    public void KnockBack(Vector2 direction)
+    public void KnockBack()
     {
+        Vector2 direction = player.position - transform.position;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
         rb.AddForce(-direction * knockbackForce, ForceMode2D.Impulse);
+        // TODO: 매직넘버 삭제
+        StartCoroutine(StopKnockBackAfterDelay(rb, knockbackDuration));
     }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;    
+    }
+    private IEnumerator StopKnockBackAfterDelay(Rigidbody2D rb, float knockbackDuration)
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        rb.velocity = Vector2.zero;
     }
 }

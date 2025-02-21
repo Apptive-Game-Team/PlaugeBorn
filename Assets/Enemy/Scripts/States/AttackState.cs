@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackState : IEnemyState
 {
+    public float DELAY_DURATION = 1.5f;
     public void EnterState(IEnemyAI enemy)
     {
         Debug.Log("Entering Attack State"); // 로그
@@ -12,7 +13,7 @@ public class AttackState : IEnemyState
     }
     public void UpdateState(IEnemyAI enemy)
     {
-        enemy.ChangeState(new IdleState());
+        enemy.ChangeState(new AttackDelayState(DELAY_DURATION));
     }
     public void ExitState(IEnemyAI enemy)
     {

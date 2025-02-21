@@ -3462,6 +3462,7 @@ GameObject:
   - component: {fileID: 2253657236105658127}
   - component: {fileID: -2944165153865013550}
   - component: {fileID: -7064644618074364017}
+  - component: {fileID: 4904030858575250820}
   m_Layer: 6
   m_Name: ShieldBossEnemy
   m_TagString: Enemy
@@ -3537,7 +3538,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.3}
@@ -3551,7 +3552,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8821041145975681684}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -3582,8 +3583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1084586ef40052e4d966d1723cccc7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShieldProjectile: {fileID: 7521978091673378459, guid: 968ee8091aacdfe42a551296c8145c13,
+  shieldProjectile: {fileID: 7521978091673378459, guid: 968ee8091aacdfe42a551296c8145c13,
     type: 3}
+  shieldList: []
   redLinePrefab: {fileID: 7332009575224457376, guid: 88b7b3cf0e3d95843aeff8529a4452b7,
     type: 3}
   lineLength: 0
@@ -3620,6 +3622,19 @@ MonoBehaviour:
     m_Bits: 8
   animator: {fileID: 2877029442533378599}
 --- !u!114 &-7064644618074364017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821041145975681684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a36dd2272b05e4f9ef003aa5fd2eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+--- !u!114 &4904030858575250820
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

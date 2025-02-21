@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class ShieldProjectileAttack : MonoBehaviour
 {
+    private ShieldBossAttack bossAttack;
     private Vector2 dir;
     private float speed = 5.0f; // 기본값
     private float duration = 2.0f; // 기본값
+
+    public void SetBossAttack(ShieldBossAttack attack)
+    {
+        bossAttack = attack;
+    }
 
     public void SetDir(Vector2 dir)
     {
@@ -24,7 +30,7 @@ public class ShieldProjectileAttack : MonoBehaviour
         rb.AddForce(-dir * speed, ForceMode2D.Impulse);
         yield return new WaitForSeconds(duration);
 
-        Destroy(this.gameObject); 
+        Destroy(gameObject); 
     }
 
     /// <summary>
@@ -36,5 +42,13 @@ public class ShieldProjectileAttack : MonoBehaviour
     {
         this.speed = speed;
         this.duration = duration;
+    }
+
+    private void OnDestroy()
+    {
+        if (bossAttack != null)
+        {
+            bossAttack.RemoveShield(gameObject);
+        }
     }
 }

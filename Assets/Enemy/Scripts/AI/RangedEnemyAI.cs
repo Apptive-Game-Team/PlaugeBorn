@@ -33,6 +33,11 @@ public class RangedEnemyAI : MonoBehaviour, IEnemyAI
 
     public void ChangeState(IEnemyState newState)
     {
+        if (currentState is DeadState)
+        {
+            Debug.Log("Dead");
+            return;
+        }
         if (IsBlocking)
         {
             Debug.LogWarning("Now In Charging Attack");
@@ -62,7 +67,7 @@ public class RangedEnemyAI : MonoBehaviour, IEnemyAI
     // TODO: 넉백 구현하기
     public void KnockBack()
     {
-        transform.GetComponent<RangedEnemyMovement>().KnockBack(transform.position);
+        transform.GetComponent<RangedEnemyMovement>().KnockBack();
     }
     void OnDrawGizmos()
     {

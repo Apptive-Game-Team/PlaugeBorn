@@ -11,6 +11,7 @@ public class DamageRange : playerDamage // 콜라이더 활성화 시 공격하�
     if (((1 << other.gameObject.layer) & enemyLayer) != 0 && other.CompareTag("Enemy"))
         {
             Debug.Log("적 감지, 공격");
+            
             // 적의 방어력을 가져오기
             /*float enemyDefense = other.GetComponent<Enemy>().defense;
 
@@ -22,6 +23,9 @@ public class DamageRange : playerDamage // 콜라이더 활성화 시 공격하�
 
             // 적에게 데미지 적용
             other.GetComponent<Enemy>().TakeDamage(damage); */
+            
+            // 적에게 데미지 주는 함수 불러오기.
+            other.GetComponent<IEnemyStats>().TakeHit(100);
         }
     }
 }

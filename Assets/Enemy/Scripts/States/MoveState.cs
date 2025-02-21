@@ -20,6 +20,6 @@ public class MoveState : IEnemyState
     }
     public void ExitState(IEnemyAI enemy)
     {
-
+        enemy.Animator.PlayAnimation(0);
     }
 }

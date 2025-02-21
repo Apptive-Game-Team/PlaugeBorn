@@ -12,8 +12,9 @@ public class ShieldBossEnemyMovement : MonoBehaviour, IEnemyMovement
     // 넉백은 없으므로 관련 변수 없습니다.
 
     [Header("방향관련변수")]
-    private Vector3 direction;
-
+    private Vector3 direction; 
+    [Header("인식 범위 변수")]
+    public const float RecognizeRange = 10.0f;
     public float MoveSpeed 
     {
         get { return moveSpeed; }
@@ -27,7 +28,14 @@ public class ShieldBossEnemyMovement : MonoBehaviour, IEnemyMovement
 
     public void Move()
     {
-        // TODO: 매직넘버 바꾸기
+        direction = player.position - transform.position;
+        if (direction.magnitude > RecognizeRange)
+        {
+            return;
+        }
+        
+        direction.Normalize();
+        
         Vector3 scale = transform.localScale;
         if (player.position.x > transform.position.x)
         {
@@ -38,10 +46,8 @@ public class ShieldBossEnemyMovement : MonoBehaviour, IEnemyMovement
             scale.x = 3.0f;
         }
         transform.localScale = scale;
-        direction = player.position - transform.position;
-        direction.Normalize();
 
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        transform.position += direction * (moveSpeed * Time.deltaTime);
     }
 
     void Start()

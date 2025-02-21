@@ -7,10 +7,11 @@ public class MeleeEnemyMovement : MonoBehaviour, IEnemyMovement
     public float moveSpeed = 5f;
     private Transform player;
 
-    // knockback 관련 변수들
+    [Header("넉백 관련 변수")]
     public float knockbackForce = 5f;
-    public float knockbackDuration = 0.5f;
+    public float knockbackDuration = 0.1f;
 
+    [Header("인식 범위 변수")] public const float RecognizeRange = 10.0f;
     public float MoveSpeed
     {
         get { return moveSpeed; }
@@ -28,6 +29,12 @@ public class MeleeEnemyMovement : MonoBehaviour, IEnemyMovement
     public void Move()
     {
         Vector3 scale = transform.localScale; 
+        Vector3 direction = player.position - transform.position;
+        if (direction.magnitude > RecognizeRange)
+        {
+            return;
+        }
+        
         if (player.position.x > transform.position.x)
         {
             scale.x = -1.0f;
@@ -36,19 +43,21 @@ public class MeleeEnemyMovement : MonoBehaviour, IEnemyMovement
         {
             scale.x = 1.0f;
         }
+        
         transform.localScale = scale;
-        Vector3 direction = player.position - transform.position;
         direction.Normalize();
 
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        transform.position += direction * (moveSpeed * Time.deltaTime);
     }
 
-    // TODO: 잘 안됨
-    public void KnockBack(Vector2 direction)
+    public void KnockBack()
     {
+        Vector2 direction = player.position - transform.position;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
         rb.AddForce(-direction * knockbackForce, ForceMode2D.Impulse);
+        // TODO: 매직넘버 삭제
+        StartCoroutine(StopKnockBackAfterDelay(rb, knockbackDuration));
     }
     // Start is called before the first frame update
     void Start()
@@ -56,5 +65,11 @@ public class MeleeEnemyMovement : MonoBehaviour, IEnemyMovement
         // 태그로 플레이어 찾기
         player = GameObject.FindGameObjectWithTag("Player").transform;
         
+    }
+
+    private IEnumerator StopKnockBackAfterDelay(Rigidbody2D rb, float knockbackDuration)
+    {
+        yield return new WaitForSeconds(knockbackDuration);
+        rb.velocity = Vector2.zero;
     }
 }

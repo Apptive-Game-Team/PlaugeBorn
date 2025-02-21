@@ -36,6 +36,11 @@ public class MeleeEnemyAI : MonoBehaviour, IEnemyAI
 /// <param name="newState"></param>
     public void ChangeState(IEnemyState newState)
     {
+        if (currentState is DeadState)
+        {
+            Debug.Log("Dead");
+            return;
+        }
         if (IsBlocking)
         {
             Debug.LogWarning("Now In Charging Attack");
@@ -71,6 +76,6 @@ public class MeleeEnemyAI : MonoBehaviour, IEnemyAI
 
     public void KnockBack()
     {
-        transform.GetComponent<MeleeEnemyMovement>().KnockBack(Vector2.down);
+        transform.GetComponent<MeleeEnemyMovement>().KnockBack();
     }
 }

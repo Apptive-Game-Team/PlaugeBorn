@@ -21,8 +21,8 @@ public class StunState : IEnemyState
             {
                 enemyMB.StopCoroutine(stunCoroutine);
             }
-            stunCoroutine = enemyMB.StartCoroutine(WaitForNextState(enemy));
             enemy.KnockBack();
+            stunCoroutine = enemyMB.StartCoroutine(WaitForNextState(enemy));
         }
     }
     public void UpdateState(IEnemyAI enemy)

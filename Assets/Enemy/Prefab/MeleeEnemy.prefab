@@ -153,6 +153,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2113891675186017871, guid: 25c5c0dfe589a4611951bbaaeee802a6,
+        type: 3}
+      propertyPath: m_TagString
+      value: EnemyAttack
+      objectReference: {fileID: 0}
     - target: {fileID: 2135219508134426498, guid: 25c5c0dfe589a4611951bbaaeee802a6,
         type: 3}
       propertyPath: m_Layer
@@ -322,6 +327,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4954885098937096392, guid: 25c5c0dfe589a4611951bbaaeee802a6,
+        type: 3}
+      propertyPath: m_TagString
+      value: EnemyAttack
       objectReference: {fileID: 0}
     - target: {fileID: 5003576561859097574, guid: 25c5c0dfe589a4611951bbaaeee802a6,
         type: 3}
@@ -603,7 +613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   knockbackForce: 5
-  knockbackDuration: 0.5
+  knockbackDuration: 0.1
 --- !u!114 &5482844626310056360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,14 +688,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6311454775650917052}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
